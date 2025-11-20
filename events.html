@@ -7,15 +7,16 @@
     <title>Community Support Tracker Project</title>
 </head>
 <body>
-    <!-- <header>
+    <header>
         <h1>Community</h1>
-    </header>
-
     <nav>
-        <a href="donation.html">Donation Tracker</a>
-        <a href="volunteer.html">Volunteer Hours</a>
-        <a href="events.html">Event Signup</a>
-    </nav> -->
+        <ul>
+            <li><a href="donation.html">Donation Tracker</a></li>
+            <li><a href="volunteer.html">Volunteer Hours</a></li>
+            <li><a href="events.html">Event Signup</a></li>
+        </ul>
+    </nav>
+    </header>
     <main>
         <form>
             <h2> Event Signup</h2>
@@ -32,28 +33,34 @@
                     <input type="radio" id="option3" name="event-type" value="fundraiser">
                 </label>
             </div>
-            <div class="rep-input-group">
-                <label>First Name:</label>
-                <input type="text">
-                <label> Last Name:</label>
-                <input type="text">
+            <div class="rep-name-group">
+                <div class="field-name">
+                    <label>First Name:</label>
+                    <input type="text" id="first-name" name="first-name">
+                </div>
+                <div class="field-name">
+                    <label> Last Name:</label>
+                    <input type="text" id="last-name" name="last-name">
+                </div>
+            </div>
+            <div class="additional-info">
                 <label> Email:</label>
                 <input type="email">
-            </div>
-            <div class="dropdown">
-                <select>
-                    <option>Choose your Event Role:</option>
-                    <option>Sponsor</option>
-                    <option>Participant</option>
-                    <option>Organizer</option>
-                </select>
+                <div class="dropdown">
+                    <select>
+                        <option>Choose your Event Role:</option>
+                        <option>Sponsor</option>
+                        <option>Participant</option>
+                        <option>Organizer</option>
+                    </select>
+                </div>
             </div>
             <button>Sign Up</button>
         </form>
 
     </main>
     <footer>
-        <p></p>
+        <p>&copy; 2025 Community Sign up</p>
     </footer>
 </body>
 </html>
