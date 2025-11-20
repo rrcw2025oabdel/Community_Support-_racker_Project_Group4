@@ -1,0 +1,84 @@
+body{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f1f1f1;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #E3DCC7;
+    background: linear-gradient(13deg, #7D7D7D 0%, #E3DCC7 34%,#E3DCC7 67%,  #7D7D7D 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px #D3D3D3;
+    max-width: 1000px;
+    width: 90%;
+    
+}
+
+
+form h2{
+    color: #252545;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+input, textarea, select {
+    padding: 0.4rem;
+    border: 1px solid #7D7D7D;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+    color: #1A1A2E;
+    text-align: center;
+    border-radius: 5px 10px 5px 10px;
+    margin: .5rem;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: #1452EB; 
+    box-shadow: 0 0 5px #7D7D7D;
+    outline: none;
+}
+
+button{
+    display: block;
+    background-color: #252545;
+    color: #fff;
+    font-weight: bold;
+    border: none; 
+    width: 40%;
+    padding: .5rem; 
+    font-size: 1.3rem;
+    border-radius: 5px 10px 5px 10px;
+    cursor: pointer;
+    margin: 2rem auto;
+}
+
+button:hover{
+    background-color:  #1452eb;
+    transform: scale(1.03);
+
+
+}
+
+.event-radio-group {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+@media (max-width: 600px) {
+    form {
+        padding: 1rem;
+    }
+    button {
+        width: 100%;
+    }
+}
+
