@@ -6,6 +6,7 @@ body {
     color: #1A1A1A;
 }
 
+
 .container {
     width: 90%;
     max-width: 1200px;
@@ -81,6 +82,10 @@ body {
     justify-content: center;
     align-items:center;
 }
+.error-message {
+				color: #57539f;
+				font-style: italic;
+}
 
 form {
     grid-column-start: 2;
@@ -137,7 +142,8 @@ input:focus, textarea:focus, select:focus {
 #radio-title{
     grid-column-start: 1;
     grid-column-end: 13;
-    text-align: center; 
+    text-align: center;
+    margin-bottom: 0.2rem; 
 }
 .event-radio-group{
     grid-column-start: 1;
