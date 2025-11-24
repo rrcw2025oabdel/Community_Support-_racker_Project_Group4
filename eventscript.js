@@ -4,6 +4,8 @@ Paige Bender
 November 20th, 2025
 */
 
+let tempData = {};
+
 const form = document.getElementById("event-form")
 
 form.addEventListener("submit", (event) => {
@@ -15,7 +17,15 @@ form.addEventListener("submit", (event) => {
     }
 
     if (validateForm()) {
-        form.submit();
+        // form.submit();
+        tempData = {
+            firstName: document.getElementById("first-name").value,
+            lastName: document.getElementById("last-name").value,
+            email: document.getElementById("email").value,
+            eventType: document.querySelector('input[name="event-type"]:checked').value,
+            participant: document.getElementById("participant").value
+        };
+        console.log(tempData.firstName)
         console.log("validation successful")
     } else {
         console.log("validation not successful") 
