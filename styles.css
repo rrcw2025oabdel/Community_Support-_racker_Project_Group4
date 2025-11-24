@@ -1,0 +1,151 @@
+/* General style*/
+body {
+    font-family: 'Inter', sans-serif;
+    background: #E5E8EA;
+    margin: 0;
+    color: #1A1A1A;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+.main-header {
+    background: #313886;
+    padding: 16px 0;
+    color: white;
+    box-shadow: 0 2px 5px #0000001a;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 100px;
+}
+
+/* Navigation bar */
+.main-nav ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.main-nav a:hover {
+    color: #67AADC;
+    text-decoration: none;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+}
+
+/* Features sections */
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    padding: 60px 0;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 25px;
+    padding: 5px;
+    box-shadow: 0 3px 10px #0000001a;
+    text-align: center;
+}
+
+.feature-card img {
+    width: 100%;
+    aspect-ratio: 9 / 9;
+    object-fit: cover;
+    border-radius: 19px;
+}
+
+.feature-card h2 {
+    font-size: 26px;
+    color: #575E9F;
+    margin-top: 16px;
+}
+
+.feature-card p {
+    font-size: 16px;
+    line-height: 1.6em;
+    margin-top: 10px;
+}
+
+/* Footer */
+.main-footer {
+    background: #878CB6;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    margin-top: 90px;
+}
+
+/* Responsive mobile */
+
+@media (max-width: 900px) {
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+        background: #313886;
+        position: absolute;
+        right: 0;
+        top: 70px;
+        width: 200px;
+        padding: 20px;
+        border-radius: 0 0 0 16px;
+    }
+
+    .main-nav.open {
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .feature-card img {
+        aspect-ratio: 3 / 3;
+    }
+}
