@@ -3,22 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css" />
-    <title>Community Support Tracker Project</title>
+    <title>PiXELL River Community Support</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
 <body>
-     <header>
-        <h1>Community</h1>
-    <nav>
-        <ul>
-            <li><a href="donation.html">Donation Tracker</a></li>
-            <li><a href="volunteer.html">Volunteer Hours</a></li>
-            <li><a href="events.html">Event Signup</a></li>
-        </ul>
-    </nav>
-    </header>
-    <footer>
-        <p>2025 Community Sign up</p>
-    </footer>
+
+<header class="main-header">
+    <div class="container header-content">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images/Logo.png" alt="Logo">
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav" id="navMenu">
+            <ul>
+                <li><a href="#">Donation Tracker</a></li>
+                <li><a href="volunteer.html">Volunteer Hours</a></li>
+                <li><a href="#">Event Signup</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hamburger Menu -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- Main content -->
+<section class="features container">
+
+    <!-- Donation Tracker section -->
+    <div class="feature-card">
+        <img src="images/donation-tracker-logo.png" alt="Donation Tracker">
+        <h2>Donation Tracker</h2>
+        <p>
+            Track donations made to different charities, including the amount, the charity name,
+            dates, and personalized messages. Gain insights into your organization’s total community
+            contributions over time.
+        </p>
+    </div>
+
+    <!-- Volunteer Hours Tracker section -->
+    <div class="feature-card">
+        <img src="images/Volunteer-Hours-Tracker-logo.png" alt="Volunteer Hours Tracker">
+        <h2>Volunteer Hours Tracker</h2>
+        <p>
+            Employees can record their volunteer hours, the organizations they supported, and their
+            experiences. This promotes a strong culture of community involvement within PiXELL River.
+        </p>
+    </div>
+
+    <!-- Event Signup section -->
+    <div class="feature-card">
+        <img src="images/event-signup-logo.png" alt="Event Signup">
+        <h2>Event Signup</h2>
+        <p>
+            Register the company for charity galas, community cleanups, or food drives. Manage event
+            details and ensure proper coordination for PiXELL River’s community participation.
+        </p>
+    </div>
+
+</section>
+
+
+<footer class="main-footer">
+    <div class="container">
+        <p>© 2025 PiXELL River Financial — Community Support</p>
+    </div>
+</footer>
+
+
+
+
+
 </body>
 </html>
