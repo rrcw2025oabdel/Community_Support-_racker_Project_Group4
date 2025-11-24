@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiXELL River Community Support</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="donation.js" defer></script>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="container header-content">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images/Logo.png" alt="Logo">
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav" id="navMenu">
+            <ul>
+                <li><a href="donation.html">Donation Tracker</a></li>
+                <li><a href="volunteer.html">Volunteer Hours</a></li>
+                <li><a href="events.html">Event Signup</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hamburger Menu -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</header>
+
+<!-- Donation Tracker Form Section -->
+<section id="donationTracker" class="donation-tracker container">
+    <h2>Donation Tracker</h2>
+    <p>Track and manage donations made to different charities. Enter new donations below:</p>
+
+    <form id="donationForm">
+        <div class="form-group">
+            <label for="charityName">Charity Name:</label>
+            <input type="text" id="charityName" name="charityName" class="donation-tracker__input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="donationAmount">Donation Amount ($):</label>
+            <input type="number" id="donationAmount" name="donationAmount" class="donation-tracker__input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="donationDate">Date of Donation:</label>
+            <input type="date" id="donationDate" name="donationDate" class="donation-tracker__input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="donorMessage">Donor Comment/Message:</label>
+            <textarea id="donorMessage" name="donorMessage" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="donation-tracker__btn">Add Donation</button>
+    </form>
+
+    <!-- submitted donations will be added here -->
+    <div id="donationList" class="donation-list"></div>
+</section>
+
+<footer class="main-footer">
+    <div class="container">
+        <p>© 2025 PiXELL River Financial — Community Support</p>
+    </div>
+</footer>
+
+</body>
+</html>
