@@ -7,39 +7,37 @@
     <title>Community Support Tracker Project</title>
 </head>
 <body>
-    <body>
+    <header class="main-header">
+        <div class="container header-content">
 
-<header class="main-header">
-    <div class="container header-content">
+            <!-- Logo -->
+            <div class="logo">
+                <img src="images/Logo.png" alt="Logo">
+            </div>
 
-        <!-- Logo -->
-        <div class="logo">
-            <img src="images/Logo.png" alt="Logo">
+            <!-- Navigation Menu -->
+            <nav class="main-nav" id="navMenu">
+                <ul>
+                    <li><a href="#">Donation Tracker</a></li>
+                    <li><a href="#">Volunteer Hours</a></li>
+                    <li><a href="events.html">Event Signup</a></li>
+                </ul>
+            </nav>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
         </div>
-
-        <!-- Navigation Menu -->
-        <nav class="main-nav" id="navMenu">
-            <ul>
-                <li><a href="#">Donation Tracker</a></li>
-                <li><a href="#">Volunteer Hours</a></li>
-                <li><a href="events.html">Event Signup</a></li>
-            </ul>
-        </nav>
-
-        <!-- Hamburger Menu -->
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-    </div>
-</header>
-    <main>
-        <div class="container">
+    </header>
+    <main class ="main-container">
         <form id="event-form">
-            <h2> Event Signup</h2>
+            <h1> Event Signup</h1>
             <p> Sign up your representative today!</p>
+            <!-- <img src="images/event-signup-logo.png" alt="Event Signup"> -->
             <label id="radio-title">Select your Event:</label>
             <div class="event-radio-group">
                 <label for="option1">Community Cleanup
@@ -52,12 +50,11 @@
                     <input type="radio" id="option3" name="event-type" value="fundraiser">
                 </label>
             </div>
-            <div class="rep-name-group">
-                <div class="field-name">
+            <div class="first-name">
                     <label>First Name:</label>
                     <input type="text" id="first-name" name="first-name">
                 </div>
-                <div class="field-name">
+            <div class="last-name">
                     <label> Last Name:</label>
                     <input type="text" id="last-name" name="last-name">
                 </div>
@@ -76,8 +73,6 @@
             </div>
             <button class="submit-button">Sign Up</button>
         </form>
-        </div>
- 
     </main>
     <footer class="main-footer">
         <div class="container">
@@ -85,6 +80,6 @@
         </div>
     </footer>
     <script src="eventscript.js"></script>
-    
+
 </body>
 </html>
