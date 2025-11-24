@@ -3,25 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="eventstyles.css" />
     <title>Community Support Tracker Project</title>
 </head>
 <body>
-    <header>
-        <h1>Community</h1>
-    <nav>
-        <ul>
-            <li><a href="donation.html">Donation Tracker</a></li>
-            <li><a href="volunteer.html">Volunteer Hours</a></li>
-            <li><a href="events.html">Event Signup</a></li>
-        </ul>
-    </nav>
-    </header>
+    <body>
+
+<header class="main-header">
+    <div class="container header-content">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images/Logo.png" alt="Logo">
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav" id="navMenu">
+            <ul>
+                <li><a href="#">Donation Tracker</a></li>
+                <li><a href="#">Volunteer Hours</a></li>
+                <li><a href="events.html">Event Signup</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hamburger Menu -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</header>
     <main>
-        <form>
+        <div class="container">
+        <form id="event-form">
             <h2> Event Signup</h2>
             <p> Sign up your representative today!</p>
-            <label>Select your Event:</label>
+            <label id="radio-title">Select your Event:</label>
             <div class="event-radio-group">
                 <label for="option1">Community Cleanup
                     <input type="radio" id="option1" name="event-type" value="cleanup">
@@ -43,24 +62,29 @@
                     <input type="text" id="last-name" name="last-name">
                 </div>
             </div>
-            <div class="additional-info">
+            <div class="email-class">
                 <label> Email:</label>
-                <input type="email">
-                <div class="dropdown">
-                    <select>
-                        <option>Choose your Event Role:</option>
-                        <option>Sponsor</option>
-                        <option>Participant</option>
-                        <option>Organizer</option>
-                    </select>
-                </div>
+                <input type="email" id="email">
             </div>
-            <button>Sign Up</button>
+            <div class="dropdown">
+                    <select id="participant" name="participant-dropdown">
+                        <option value="option-1">Choose your Event Role:</option>
+                        <option value="option-2">Sponsor</option>
+                        <option value="option-3">Participant</option>
+                        <option value="option-4">Organizer</option>
+                    </select>
+            </div>
+            <button class="submit-button">Sign Up</button>
         </form>
-
+        </div>
+ 
     </main>
-    <footer>
-        <p>&copy; 2025 Community Sign up</p>
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2025 PiXELL River Financial — Community Support</p>
+        </div>
     </footer>
+    <script src="eventscript.js"></script>
+    
 </body>
 </html>

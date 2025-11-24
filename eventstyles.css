@@ -65,43 +65,6 @@ body {
     background: white;
     border-radius: 3px;
 }
-
-/* Features sections */
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    padding: 60px 0;
-}
-
-.feature-card {
-    background: white;
-    border-radius: 25px;
-    padding: 5px;
-    box-shadow: 0 3px 10px #0000001a;
-    text-align: center;
-}
-
-.feature-card img {
-    width: 100%;
-    aspect-ratio: 9 / 9;
-    object-fit: cover;
-    border-radius: 19px;
-}
-
-.feature-card h2 {
-    font-size: 26px;
-    color: #575E9F;
-    margin-top: 16px;
-}
-
-.feature-card p {
-    font-size: 16px;
-    line-height: 1.6em;
-    margin-top: 10px;
-}
-
-/* Footer */
 .main-footer {
     background: #878CB6;
     padding: 20px 0;
@@ -109,6 +72,9 @@ body {
     color: white;
     margin-top: 90px;
 }
+
+
+
 
 /* Responsive mobile */
 
