@@ -6,6 +6,7 @@ body {
     color: #1A1A1A;
 }
 
+
 .container {
     width: 90%;
     max-width: 1200px;
@@ -235,3 +236,11 @@ body {
     margin: 0.2rem 0;
     color: #333;
 }
+
+.donation-tracker .error-message {
+    color: red ;
+    margin-top: 4px ;
+    font-style: italic ;
+    font-size: 0.9rem ;
+}
+
