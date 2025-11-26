@@ -23,21 +23,29 @@ const validateForm = () =>{
 
     // Validator for the Charity Name Text Field
     if (charityName.value === "") {
+        showInputError(charityName, "Please enter a charity name")
         isValid = false;
     }
 
     // Validator for the Hours Volunteered number input
     if (volunteerHours.value <= 0) {
+        showInputError(volunteerHours, "Value must be higher than zero")
         isValid = false;
     }
 
     // Validator for the Volunteering Date Field
-    if (dateVolunteered.value === "") {
-
+    const dateCheck = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateCheck.test(dateVolunteered.value)){
+        showInputError(dateVolunteered, "Please select a date");
+        isValid = false;
     }
 
     // Validator for the 1-5 point rating of the volunteering experience
-    if (1 <= volunteerRating.value >= 5) {
+    if (1 > volunteerRating.value || volunteerRating.value > 5) {
+        showInputError(volunteerRating, "Must be in the 1-5 range.");
+        isValid = false;
+    } else if (volunteerRating.value === "") {
+        showInputError(volunteerRating, "Please select a rating");
         isValid = false;
     }
 
@@ -46,12 +54,18 @@ const validateForm = () =>{
 
 // Event listening for Form Submission
 form.addEventListener("submit", (event) =>{
+    const errorMessages = document.querySelectorAll(".error-message");
+    for (const el of errorMessages) {
+        el.remove();
+    }
+
     event.preventDefault();
 
     if (validateForm()) {
         let storeData = {charity: charityName.value, hours: volunteerHours.value, date: dateVolunteered.value, rating: volunteerRating.value};
-        console.log(`Charity Name: ${storeData.charity}, Hours: ${storeData.hours}, Date: ${storeData.date}, Rating: ${storeData.rating}`);
         form.submit();
+        console.log(`Charity Name: ${storeData.charity}, Hours: ${storeData.hours}, Date: ${storeData.date}, Rating: ${storeData.rating}`);
+        console.log(`Charity Name: ${storeData.charity}, Hours: ${storeData.hours}, Date: ${storeData.date}, Rating: ${storeData.rating}`);
     } else {
         console.log("temp-fail")
     }
