@@ -1,0 +1,239 @@
+/* General style*/
+body {
+    font-family: 'Inter', sans-serif;
+    background: #E5E8EA;
+    margin: 0;
+    color: #1A1A1A;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+.main-header {
+    background: #313886;
+    padding: 16px 0;
+    color: white;
+    box-shadow: 0 2px 5px #0000001a;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 100px;
+}
+
+/* Navigation bar */
+.main-nav ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.main-nav a:hover {
+    color: #67AADC;
+    text-decoration: none;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+}
+.main-footer {
+    background: #878CB6;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    margin-top: 90px;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+    padding: 60px 0;
+    justify-content: center;
+    align-items:center;
+}
+.error-message {
+				color: #57539f;
+				font-style: italic;
+}
+
+form {
+    grid-column-start: 2;
+    grid-column-end: 12; 
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+    background: #fff;
+	padding: 2rem;
+	border-radius: 2rem;
+	box-shadow: 0 3px 10px #0000001a;
+  
+} 
+/* fieldset{
+ grid-column-start: 1;
+ grid-column-end: 13;   
+} */
+
+form h1{
+    color: #575E9F;
+    font-weight: bold;
+    font-size: 32px;
+    margin-bottom: .2rem;
+    grid-column-start: 1;
+    grid-column-end: 13;
+    text-align: center; 
+}
+
+form p {
+    margin-top: 0;
+    margin-bottom: 3rem;   
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1A1A1A;
+    grid-column-start: 1;
+    grid-column-end: 13;
+    text-align: center; 
+
+}
+
+input, textarea, select {
+    font-size: 26px;
+    background-color: #fff;
+    color: #1A1A1A;
+    border: 1px solid #706767;
+	border-radius: 0.25em;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #313886; 
+    box-shadow: 0 0 5px #575E9F;
+    outline: none;
+}
+#radio-title{
+    grid-column-start: 1;
+    grid-column-end: 13;
+    text-align: center;
+    margin-bottom: 0.2rem; 
+}
+.event-radio-group{
+    grid-column-start: 1;
+    grid-column-end: 13;
+    text-align: center; 
+}
+input[type="radio"],textarea,select {
+    outline: none;
+}
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #3A5AE0; 
+    cursor: pointer;
+    margin-right: 0.5rem;
+    margin-bottom: 2rem;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.first-name, .last-name, .email-class, .dropdown{
+    grid-column-start: 1;
+    grid-column-end: 13;
+    text-align: center; 
+    width: 100%;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.submit-button{
+    grid-column-start: 5;
+    grid-column-end: 9;
+    justify-self: center;
+    background-color: #313886;
+    color: #fff;
+    font-weight: bold;
+    border: none; 
+    width: 100%;
+    margin: .5rem;
+    padding: .5rem; 
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.submit-button:hover{
+    background-color: #313886;
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px #575E9F;
+}
+
+
+
+/* Responsive mobile */
+
+@media (max-width: 900px) {
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+        background: #313886;
+        position: absolute;
+        right: 0;
+        top: 70px;
+        width: 200px;
+        padding: 20px;
+        border-radius: 0 0 0 16px;
+    }
+
+    .main-nav.open {
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .feature-card img {
+        aspect-ratio: 3 / 3;
+    }
+}

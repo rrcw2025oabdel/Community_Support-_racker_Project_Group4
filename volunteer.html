@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <script src="volunteer.js" defer></script>
+    <script src="script.js" defer></script>
+    <title>Volunteer Hours</title>
+</head>
+<body>
+<header class="main-header">
+    <div class="container header-content">
+
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images/Logo.png" alt="Logo">
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav" id="navMenu">
+            <ul>
+                <li><a href="donation.html">Donation Tracker</a></li>
+                <li><a href="volunteer.html">Volunteer Hours</a></li>
+                <li><a href="events.html">Event Signup</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hamburger Menu -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</header>
+    <main>
+    <section id="volunteerHourTracker" class="volunteer-hour container">
+        <form id="volunteer-hours-tracker">
+            <h2>Volunteer Hours Tracker</h2>
+                <div class="form-group">
+                    <label for="charity">Charity Name:</label>
+                    <input type="text" id="charity" name="charity">
+                </div>
+
+                <div class="form-group">
+                    <label for="hours">Total Hours Volunteered:</label>
+                    <input type="number" id="hours" name="hours">
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date of Volunteering Occurence:</label>
+                    <input type="date" id="date" name="date">
+                </div>
+
+                <div class="form-group">
+                    <label for="rating">On a scale of 1-5, how was your volunteering experience?</label>
+                    <input type="number" id="rating" name="rating">
+                </div>
+                <button type="submit" class="volunteer-hour__btn">Submit</button>
+        </form>
+    </section>
+    </main>
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2025 PiXELL River Financial — Community Support</p>
+        </div>
+    </footer>
+</body>
+</html>
