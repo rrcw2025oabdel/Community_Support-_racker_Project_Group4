@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="eventstyles.css" />
+    <title>Community Support Tracker Project</title>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+
+            <!-- Logo -->
+            <div class="logo">
+                <img src="images/Logo.png" alt="Logo">
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="main-nav" id="navMenu">
+                <ul>
+                    <li><a href="#">Donation Tracker</a></li>
+                    <li><a href="#">Volunteer Hours</a></li>
+                    <li><a href="events.html">Event Signup</a></li>
+                </ul>
+            </nav>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+    </header>
+    <main class ="main-container">
+        <form id="event-form">
+            <h1> Event Signup</h1>
+            <p> Sign up your representative today!</p>
+            <!-- <img src="images/event-signup-logo.png" alt="Event Signup"> -->
+            
+            <div class="event-radio-group">
+                <p id="radio-title">Select your Event:</p>
+                <label for="option1">Community Cleanup
+                    <input type="radio" id="option1" name="event-type" value="cleanup">
+                </label>
+                <label for="option2">Food Drive
+                    <input type="radio" id="option2" name="event-type" value="food-drive">
+                </label>
+                <label for="option3">Fundraising Dinner
+                    <input type="radio" id="option3" name="event-type" value="fundraiser">
+                </label>
+            </div>
+            <div class="first-name">
+                    <label>First Name:</label>
+                    <input type="text" id="first-name" name="first-name">
+                </div>
+            <div class="last-name">
+                    <label> Last Name:</label>
+                    <input type="text" id="last-name" name="last-name">
+                </div>
+            </div>
+            <div class="email-class">
+                <label> Email:</label>
+                <input type="email" id="email">
+            </div>
+            <div class="dropdown">
+                    <select id="participant" name="participant-dropdown">
+                        <option value="option-1">Choose your Event Role:</option>
+                        <option value="option-2">Sponsor</option>
+                        <option value="option-3">Participant</option>
+                        <option value="option-4">Organizer</option>
+                    </select>
+            </div>
+            <button class="submit-button">Sign Up</button>
+        </form>
+    </main>
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2025 PiXELL River Financial — Community Support</p>
+        </div>
+    </footer>
+    <script src="eventscript.js"></script>
+
+</body>
+</html>
