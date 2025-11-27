@@ -1,0 +1,13 @@
+{
+  "name": "volunteer",
+  "version": "1.0.0",
+  "description": "Testing the volunteer hour tracker",
+  "main": "volunteer.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "jsdom": "^24.1.3"
+  }
+}
