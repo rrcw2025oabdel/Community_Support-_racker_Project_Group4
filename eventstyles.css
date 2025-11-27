@@ -83,7 +83,7 @@ body {
     align-items:center;
 }
 .error-message {
-				color: #57539f;
+				color: red;
 				font-style: italic;
 }
 
@@ -130,13 +130,12 @@ input, textarea, select {
     font-size: 26px;
     background-color: #fff;
     color: #1A1A1A;
-    border: 1px solid #706767;
+    border: 1px solid #ccc;
 	border-radius: 0.25em;
 }
 
 input:focus, textarea:focus, select:focus {
-    border-color: #313886; 
-    box-shadow: 0 0 5px #575E9F;
+    border-color: #313886;
     outline: none;
 }
 #radio-title{
@@ -191,9 +190,7 @@ input[type="radio"] {
 }
 
 .submit-button:hover{
-    background-color: #313886;
-    transform: scale(1.03);
-    box-shadow: 0 4px 12px #575E9F;
+    background-color: #5058c0;
 }
 
 
