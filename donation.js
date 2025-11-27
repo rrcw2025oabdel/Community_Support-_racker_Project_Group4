@@ -15,6 +15,7 @@ function clearErrors(form) {
 
 // Showing error message
 function showError(input, message) {
+    console.log('showError called for:', input.name, message);
     const errorText = document.createElement('p');
     errorText.classList.add('error-message'); 
     errorText.textContent = message;
@@ -36,37 +37,37 @@ function handleDonationSubmit(event) {
 
     // Collecting form data into an object
     const formData = {
-        charityName: form.charityName.value.trim(),
-        donationAmount: form.donationAmount.value.trim(),
-        donationDate: form.donationDate.value,
-        donorMessage: form.donorMessage.value.trim(),
+    charityName: form.elements.charityName.value.trim(),
+    donationAmount: form.elements.donationAmount.value.trim(),
+    donationDate: form.elements.donationDate.value,
+    donorMessage: form.elements.donorMessage.value.trim(),
     };
 
     let isValid = true; 
-
+    console.log('Validating date:', formData.donationDate, form.elements['donationDate'].value);
     // Validating Charity Name
     if (!formData.charityName) {
-        showError(form.charityName, "Charity name is required.");
+        showError(form.elements['charityName'], "Charity name is required.");
         isValid = false;
     }
 
     // Validating Donation Amount
     if (formData.donationAmount === "") {     
-    showError(form.donationAmount, "Donation amount is required.");
+    showError(form.elements['donationAmount'], "Donation amount is required.");
     isValid = false;
 
     } else if (isNaN(formData.donationAmount)) {  
-    showError(form.donationAmount, "Please enter numbers only.");
+    showError(form.elements['donationAmount'], "Please enter numbers only.");
     isValid = false;
 
     } else if (Number(formData.donationAmount) <= 0) {  
-    showError(form.donationAmount, "Amount must be positive.");
+    showError(form.elements['donationAmount'], "Amount must be positive.");
     isValid = false;
     }
 
     // Validate Date
-    if (!formData.donationDate || !isValidDateFormat(formData.donationDate)) {
-    showError(form.donationDate, "Please enter a valid donation date in DD-MM-YYY format.");
+    if (formData.donationDate.trim() === "" || !isValidDateFormat(formData.donationDate)) {
+    showError(form.elements['donationDate'], "Please enter a valid donation date in YYYY-MM-DD format.");
     isValid = false;
 }
 
@@ -86,4 +87,17 @@ function handleDonationSubmit(event) {
 }
 
 // Attaching event listener to the form
-document.getElementById('donationForm').addEventListener('submit', handleDonationSubmit);
+function attachFormListener() {
+    const form = document.getElementById('donationForm');
+    if (form) {
+        form.addEventListener('submit', handleDonationSubmit);
+    }
+}
+
+
+if (typeof window !== "undefined") {
+    window.onload = attachFormListener;
+}
+
+module.exports = { donations, isValidDateFormat, showError, handleDonationSubmit };
+
