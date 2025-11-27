@@ -1,7 +1,7 @@
 const { JSDOM } = require("jsdom");
 const { validateForm, storeData } = require("./volunteer")
 
-test("when inputs are correct, then validateForm returns true thus updating the temporary data object", () => {
+test("when inputs are correct, then the storeData object data matches the input data", () => {
     const dom = new JSDOM(`<!DOCTYPE html>
     <form id="volunteer-hours-tracker"></form>
     <input id="charity" />
@@ -25,10 +25,14 @@ test("when inputs are correct, then validateForm returns true thus updating the 
         storeData.rating = document.getElementById("rating").value;
     }
 
-    expect(storeData.charity).toBe("Ronald McDonald House");
-    expect(storeData.hours).toBe("7");
-    expect(storeData.date).toBe("2025-10-25");
-    expect(storeData.rating).toBe("5");
+    testData = {
+        charity: "Ronald McDonald House",
+        hours: "7",
+        date: "2025-10-25",
+        rating: "5"
+    }
+
+    expect(storeData).toStrictEqual(testData);
 });
 
 test("when inputs are correct, then validateForm returns true", () => {
