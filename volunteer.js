@@ -16,15 +16,21 @@ const validateForm = () =>{
     const charityName = document.getElementById("charity");
 
     if (charityName.value === "") {
-        showInputError(charityName, "Please enter a charity name")
+        showInputError(charityName, "Please enter a charity name");
         isValid = false;
     }
 
     // Validator for the Hours Volunteered number input
     const volunteerHours = document.getElementById("hours");
 
-    if (volunteerHours.value <= 0) {
-        showInputError(volunteerHours, "Value must be higher than zero")
+    if (volunteerHours.value == 0) {
+        showInputError(volunteerHours, "Value cannot be zero");
+        isValid = false;
+    } else if (volunteerHours.value < 0) {
+        showInputError(volunteerHours, "Value cannot be negative.")
+        isValid = false;
+    } else if (volunteerHours.value === "") {
+        showInputError(volunteerHours, "Cannot be blank")
         isValid = false;
     }
 
