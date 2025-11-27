@@ -1,12 +1,3 @@
-// Form obtained through DOM as a constant
-const form = document.getElementById("volunteer-hours-tracker")
-
-const charityName = document.getElementById("charity");
-const volunteerHours = document.getElementById("hours");
-const dateVolunteered = document.getElementById("date");
-const volunteerRating = document.getElementById("rating");
-
-
 // Function that handles displaying the error messages
 const showInputError = (inputElement, message) => {
     const errorDisplay = document.createElement("span");
@@ -22,18 +13,24 @@ const validateForm = () =>{
     let isValid = true;
 
     // Validator for the Charity Name Text Field
+    const charityName = document.getElementById("charity");
+
     if (charityName.value === "") {
         showInputError(charityName, "Please enter a charity name")
         isValid = false;
     }
 
     // Validator for the Hours Volunteered number input
+    const volunteerHours = document.getElementById("hours");
+
     if (volunteerHours.value <= 0) {
         showInputError(volunteerHours, "Value must be higher than zero")
         isValid = false;
     }
 
     // Validator for the Volunteering Date Field
+    const dateVolunteered = document.getElementById("date");
+
     const dateCheck = /^\d{4}-\d{2}-\d{2}$/;
     if (!dateCheck.test(dateVolunteered.value)){
         showInputError(dateVolunteered, "Please select a date");
@@ -41,6 +38,8 @@ const validateForm = () =>{
     }
 
     // Validator for the 1-5 point rating of the volunteering experience
+    const volunteerRating = document.getElementById("rating");
+
     if (1 > volunteerRating.value || volunteerRating.value > 5) {
         showInputError(volunteerRating, "Must be in the 1-5 range.");
         isValid = false;
@@ -52,21 +51,36 @@ const validateForm = () =>{
     return isValid;
 }
 
+let storeData = {}
+
 // Event listening for Form Submission
-form.addEventListener("submit", (event) =>{
-    const errorMessages = document.querySelectorAll(".error-message");
-    for (const el of errorMessages) {
-        el.remove();
-    }
+if (typeof window !== "undefined") {
+    const form = document.getElementById("volunteer-hours-tracker")
 
-    event.preventDefault();
+    form.addEventListener("submit", (event) =>{
+        const errorMessages = document.querySelectorAll(".error-message");
+        for (const el of errorMessages) {
+            el.remove();
+        }
 
-    if (validateForm()) {
-        let storeData = {charity: charityName.value, hours: volunteerHours.value, date: dateVolunteered.value, rating: volunteerRating.value};
-        form.submit();
-        console.log(`Charity Name: ${storeData.charity}, Hours: ${storeData.hours}, Date: ${storeData.date}, Rating: ${storeData.rating}`);
-        console.log(`Charity Name: ${storeData.charity}, Hours: ${storeData.hours}, Date: ${storeData.date}, Rating: ${storeData.rating}`);
-    } else {
-        console.log("temp-fail")
-    }
-})
+        event.preventDefault();
+
+        if (validateForm()) {
+            storeData = {
+                charity: document.getElementById("charity").value, 
+                hours: document.getElementById("hours").value, 
+                date: document.getElementById("date").value, 
+                rating: document.getElementById("rating").value
+            };
+            form.submit();
+            console.log(storeData)
+            console.log("success!!")
+            console.log(storeData)
+        } else {
+            console.log("temp-fail")
+        }
+    });
+
+} else {
+    module.exports = { validateForm, storeData, showInputError };
+}
