@@ -79,7 +79,7 @@ if (typeof window !== "undefined") {
         }
 
         if (validateForm()) {
-            // form.submit();
+            form.submit();
             tempData = {
                 firstName: document.getElementById("first-name").value,
                 lastName: document.getElementById("last-name").value,
