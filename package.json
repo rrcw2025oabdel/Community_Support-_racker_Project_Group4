@@ -1,4 +1,16 @@
 {
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jsdom": "^27.2.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-jsdom"
+  }
+}
   "name": "community_support-_racker_project_group4",
   "version": "1.0.0",
   "description": "Community Support Tracker Project_ Group 4",

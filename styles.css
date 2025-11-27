@@ -6,6 +6,7 @@ body {
     color: #1A1A1A;
 }
 
+
 .container {
     width: 90%;
     max-width: 1200px;
@@ -151,6 +152,7 @@ body {
 }
 
 /*Donation Tracker Section style*/
+.donation-tracker {
 .donation-tracker, .volunteer-hour {
     background-color: #f9f9f9;
     padding: 2rem;
@@ -202,6 +204,7 @@ body {
 }
 
 /* Submit button */
+.donation-tracker__btn {
 .donation-tracker__btn, .volunteer-hour__btn {
     margin-top: 1rem;
     width: 100%;
@@ -214,6 +217,7 @@ body {
     cursor: pointer;
 }
 
+.donation-tracker__btn:hover {
 .donation-tracker__btn:hover, .volunteer-hour__btn:hover {
     background-color: #5058c0;
 }
@@ -236,9 +240,12 @@ body {
     color: #333;
 }
 
+.donation-tracker .error-message {
 .donation-tracker .error-message, .volunteer-hour .error-message {
     color: red ;
     margin-top: 4px ;
     font-style: italic ;
     font-size: 0.9rem ;
+}
+
 }
