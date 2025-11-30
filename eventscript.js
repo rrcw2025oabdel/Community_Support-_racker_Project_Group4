@@ -46,7 +46,7 @@ const validateForm = () => {
         }
         
         const eventDropdown = document.getElementById("participant");
-        if(eventDropdown.value ==="option-1") {
+        if(eventDropdown.value ==="choose") {
             showInputError(eventDropdown, "An option must be selected");
             isValid = false;
             console.error("an option must be selected.");
@@ -79,7 +79,7 @@ if (typeof window !== "undefined") {
         }
 
         if (validateForm()) {
-            form.submit();
+            // form.submit();
             tempData = {
                 firstName: document.getElementById("first-name").value,
                 lastName: document.getElementById("last-name").value,
@@ -87,13 +87,20 @@ if (typeof window !== "undefined") {
                 eventType: document.querySelector('input[name="event-type"]:checked').value,
                 participant: document.getElementById("participant").value
             };
-            console.log(tempData.firstName)
-            console.log("validation successful")
+
+            const stored = JSON.parse(localStorage.getItem("signups")) || [];
+            stored.push(tempData);
+            localStorage.setItem("signups", JSON.stringify(stored));
+
+            window.location.href = "event-signup-table.html";
+
+            console.log(tempData.firstName);
+            console.log("validation successful");
         } else {
-            console.log("validation not successful") 
+            console.log("validation not successful");
         }
-    });
+});
 
 } else {
-    module.exports = { validateForm, tempData, showInputError };
+    module.exports = { validateForm, showInputError };
 }

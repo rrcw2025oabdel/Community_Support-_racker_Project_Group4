@@ -40,28 +40,27 @@
         <form id="event-form">
             <h1> Event Signup</h1>
             <p> Sign up your representative today!</p>
-            <!-- <img src="images/event-signup-logo.png" alt="Event Signup"> -->
-            
             <div class="event-radio-group">
                 <p id="radio-title">Select your Event:</p>
-                <label for="option1">Community Cleanup
-                    <input type="radio" id="option1" name="event-type" value="cleanup">
-                </label>
-                <label for="option2">Food Drive
-                    <input type="radio" id="option2" name="event-type" value="food-drive">
-                </label>
-                <label for="option3">Fundraising Dinner
-                    <input type="radio" id="option3" name="event-type" value="fundraiser">
-                </label>
+                    <div class="radio-options">
+                        <label for="option1">Community Cleanup
+                        <input type="radio" id="option1" name="event-type" value="Cleanup">
+                        </label>
+                        <label for="option2">Food Drive
+                        <input type="radio" id="option2" name="event-type" value="Food-Drive">
+                        </label>
+                        <label for="option3">Fundraising Dinner
+                        <input type="radio" id="option3" name="event-type" value="Fundraiser">
+                        </label>
+                    </div>
             </div>
             <div class="first-name">
-                    <label>First Name:</label>
-                    <input type="text" id="first-name" name="first-name">
-                </div>
+                <label>First Name:</label>
+                <input type="text" id="first-name" name="first-name">
+            </div>
             <div class="last-name">
-                    <label> Last Name:</label>
-                    <input type="text" id="last-name" name="last-name">
-                </div>
+                <label> Last Name:</label>
+                <input type="text" id="last-name" name="last-name">
             </div>
             <div class="email-class">
                 <label> Email:</label>
@@ -69,10 +68,10 @@
             </div>
             <div class="dropdown">
                     <select id="participant" name="participant-dropdown">
-                        <option value="option-1">Choose your Event Role:</option>
-                        <option value="option-2">Sponsor</option>
-                        <option value="option-3">Participant</option>
-                        <option value="option-4">Organizer</option>
+                        <option value="choose">Choose your Event Role:</option>
+                        <option value="Sponsor">Sponsor</option>
+                        <option value="Participant">Participant</option>
+                        <option value="Organizer">Organizer</option>
                     </select>
             </div>
             <button class="submit-button">Sign Up</button>
