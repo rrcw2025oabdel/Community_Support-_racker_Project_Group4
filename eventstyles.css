@@ -176,7 +176,53 @@ input[type="radio"] {
 				color: red;
 				font-style: italic;
 }
+/*---------------------------------------------------------------------------*/
+.table {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 4px 8px #0000000d;
+    align-items: center;
+}
 
+.table h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #313886;
+    text-align: center;
+}
+
+.table table{
+    width: 100%;
+    border-collapse: collapse;
+
+}
+.table th, .table td{
+    padding: 0.5rem 1re,;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+}
+.table tbody tr:hover {
+    background-color: #ccc;
+}
+
+.table td button.delete-btn {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #313886;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.table td button.delete-btn:hover {
+    background-color: #5058c0;
+}
+/*____________________________________________________________________________*/
+/* Responsive mobile */
 
 @media (max-width: 900px) {
     .features {
