@@ -77,13 +77,34 @@ function handleDonationSubmit(event) {
 
     donations.push(formData);
 
-    // Displaying data temporary in the console 
-    console.log(
-  `Donation added: ${formData.charityName} - $${formData.donationAmount} on ${formData.donationDate}` + 
-  (formData.donorMessage ? ` | Comment: ${formData.donorMessage}` : '')
-);
-
     form.reset();
+    
+    displayDonations();
+    updateTotalAmount();
+}
+// Function that display donations in the table
+function displayDonations() {
+    const tableBody = document.querySelector('#donationsTable tbody');
+    tableBody.innerHTML = ""; // Clear previous rows
+
+    donations.forEach((donation, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${donation.charityName}</td>
+            <td>$${donation.donationAmount}</td>
+            <td>${donation.donationDate}</td>
+            <td>${donation.donorMessage || ""}</td>
+            <td>
+                <button class="delete-btn" onclick="deleteDonation(${index})">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+function updateTotalAmount() {
+    const total = donations.reduce((sum, donation) => sum + Number(donation.donationAmount), 0);
+    document.getElementById('totalAmount').textContent = total.toFixed(2);
 }
 
 // Attaching event listener to the form
