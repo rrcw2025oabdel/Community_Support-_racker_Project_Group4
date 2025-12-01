@@ -13,8 +13,8 @@ test("validateForm returns true when all fields are valid", () => {
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
     <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -25,7 +25,7 @@ test("validateForm returns true when all fields are valid", () => {
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
     
     const result = validateForm();
@@ -44,8 +44,8 @@ test("validateForm returns false when firstname is empty", () => {
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
     <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -56,7 +56,7 @@ test("validateForm returns false when firstname is empty", () => {
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
     const result = validateForm();
 
@@ -73,9 +73,9 @@ test("validateForm returns false when lastname is empty", () => {
     <div id="radio-title"></div>
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
-    <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+   <select id="participant">
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -86,7 +86,7 @@ test("validateForm returns false when lastname is empty", () => {
     document.getElementById("last-name").value = "";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
     
     const result = validateForm();
@@ -104,9 +104,9 @@ test("validateForm returns false when email is invalid email input", () => {
     <div id="radio-title"></div>
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
-    <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+   <select id="participant">
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -117,7 +117,7 @@ test("validateForm returns false when email is invalid email input", () => {
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
     
     const result = validateForm();
@@ -135,9 +135,9 @@ test("validateForm returns false when email is invalid email input", () => {
     <div id="radio-title"></div>
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
-    <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+   <select id="participant">
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -148,7 +148,7 @@ test("validateForm returns false when email is invalid email input", () => {
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test.@a";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
    
     const result = validateForm();
@@ -165,9 +165,9 @@ test("validateForm returns false if event type is not checked", () => {
     <div id="radio-title"></div>
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
-    <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+   <select id="participant">
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -178,7 +178,7 @@ test("validateForm returns false if event type is not checked", () => {
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = false;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
    
     const result = validateForm();
@@ -197,8 +197,8 @@ test("validateForm returns false when all participant role value is default opti
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
     <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -209,7 +209,7 @@ test("validateForm returns false when all participant role value is default opti
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-1";
+    document.getElementById("participant").value = "choose";
 
    
     const result = validateForm();
@@ -228,8 +228,8 @@ test("validateForm returns false when all participant role value is default opti
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
     <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -240,7 +240,7 @@ test("validateForm returns false when all participant role value is default opti
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-1";
+    document.getElementById("participant").value = "choose";
 
     
     const result = validateForm();
@@ -258,9 +258,9 @@ test("when validateForm returns true, info saved to tempData", () => {
     <div id="radio-title"></div>
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
-    <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+   <select id="participant">
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -272,7 +272,7 @@ test("when validateForm returns true, info saved to tempData", () => {
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
     if (validateForm()) {
         tempData.firstName = document.getElementById("first-name").value;
@@ -285,7 +285,7 @@ test("when validateForm returns true, info saved to tempData", () => {
     expect(tempData.lastName).toBe("Doe");
     expect(tempData.email).toBe("test@example.com");
     expect(tempData.eventType).toBe("option1");
-    expect(tempData.participant).toBe("option-2");
+    expect(tempData.participant).toBe("sponsor");
     });
     
     
@@ -299,8 +299,8 @@ test("when validateForm returns false, data not saved to tempData", () => {
     <input type="radio" name="event-type" value="option1" />
     <input type="radio" name="event-type" value="option2" />
     <select id="participant">
-        <option value="option-1">Select...</option>
-        <option value="option-2">Option 2</option>
+        <option value="choose">Select...</option>
+        <option value="sponsor">sponsor</option>
     </select>
 `);
 
@@ -312,7 +312,7 @@ test("when validateForm returns false, data not saved to tempData", () => {
     document.getElementById("last-name").value = "Doe";
     document.getElementById("email").value = "test@example.com";
     document.getElementsByName("event-type")[0].checked = true;
-    document.getElementById("participant").value = "option-2";
+    document.getElementById("participant").value = "sponsor";
 
     if (validateForm()) {
         tempData.firstName = document.getElementById("first-name").value;
@@ -325,7 +325,7 @@ test("when validateForm returns false, data not saved to tempData", () => {
     expect(tempData.lastName).toBe("Doe");
     expect(tempData.email).toBe("test@example.com");
     expect(tempData.eventType).toBe("option1");
-    expect(tempData.participant).toBe("option-2");
+    expect(tempData.participant).toBe("sponsor");
     });
     
     
