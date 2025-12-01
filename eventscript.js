@@ -142,42 +142,42 @@ let tempData = {};
 if (typeof window !== "undefined") {
 
     window.addEventListener("DOMContentLoaded", () => {
-        renderTable();
-        renderSummary();
+    renderTable();
+    renderSummary();   });
+    const form = document.getElementById("event-form");
 
-        const form = document.getElementById("event-form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
+        const errorMessages = document.querySelectorAll(".error-message");
+        for(const el of errorMessages){
+            el.remove();
+        }
 
-            const errorMessages = document.querySelectorAll(".error-message");
-            for (const el of errorMessages) {
-                el.remove();
-            }
+        if (validateForm()) {
+            // form.submit();
+            tempData = {
+                firstName: document.getElementById("first-name").value,
+                lastName: document.getElementById("last-name").value,
+                email: document.getElementById("email").value,
+                eventType: document.querySelector('input[name="event-type"]:checked').value,
+                participant: document.getElementById("participant").value
+            };
 
-            if (validateForm()) {
-                // form.submit();
-                tempData = {
-                    firstName: document.getElementById("first-name").value,
-                    lastName: document.getElementById("last-name").value,
-                    email: document.getElementById("email").value,
-                    eventType: document.querySelector('input[name="event-type"]:checked').value,
-                    participant: document.getElementById("participant").value
-                };
+            const stored = JSON.parse(localStorage.getItem("signups")) || [];
+            stored.push(tempData);
+            localStorage.setItem("signups", JSON.stringify(stored));
+            
+            window.location.href = "event-signup-table.html";
 
-                const stored = JSON.parse(localStorage.getItem("signups")) || [];
-                stored.push(tempData);
-                localStorage.setItem("signups", JSON.stringify(stored));
-
-                window.location.href = "event-signup-table.html";
-
-                console.log(tempData.firstName);
-                console.log("validation successful");
-            } else {
-                console.log("validation not successful");
-            }
-        });
-    }); 
+            console.log(tempData.firstName);
+            console.log("validation successful");
+        } else {
+            console.log("validation not successful");
+              }
+            });
+    
 } else {
     module.exports = { validateForm, tempData, showInputError, renderTable, attachDeleteHandlers, renderSummary };
 }
+
