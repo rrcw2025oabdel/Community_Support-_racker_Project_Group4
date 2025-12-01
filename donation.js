@@ -100,6 +100,9 @@ function handleDonationSubmit(event) {
 // Function that display donations in the table
 function displayDonations() {
     const tableBody = document.querySelector('#donationsTable tbody');
+    if (!tableBody) {
+        return;
+    }
     tableBody.innerHTML = ""; // Clear previous rows
 
     donations.forEach((donation, index) => {
@@ -128,7 +131,10 @@ function deleteDonation(index) {
 
 function updateTotalAmount() {
     const total = donations.reduce((sum, donation) => sum + Number(donation.donationAmount), 0);
-    document.getElementById('totalAmount').textContent = total.toFixed(2);
+    const totalElement = document.getElementById('totalAmount');
+    if (totalElement) {
+        totalElement.textContent = total.toFixed(2);
+    }
 }
 
 // Attaching event listener to the form
@@ -154,6 +160,8 @@ module.exports = {
     handleDonationSubmit,
     deleteDonation,
     saveDonationsToStorage,
-    loadDonationsFromStorage
+    loadDonationsFromStorage,
+    displayDonations,
+    updateTotalAmount
 };
 
