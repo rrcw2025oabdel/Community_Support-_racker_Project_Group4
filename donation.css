@@ -1,3 +1,6 @@
+/* Student Name : Abdelhamid OUGHANEM
+Version : V 2.0.0 */
+
 /* General style*/
 body {
     font-family: 'Inter', sans-serif;
@@ -242,5 +245,34 @@ body {
     margin-top: 4px ;
     font-style: italic ;
     font-size: 0.9rem ;
+}
+
+#donationsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+#donationsTable th, #donationsTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#donationsTable th {
+  background: #f2f2f2;
+  font-weight: bold;
+}
+
+#donationsTable tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+#donationSummary {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f8f8f8;
+  border-left: 4px solid #4caf50;
+  font-family: Arial, sans-serif;
 }
 

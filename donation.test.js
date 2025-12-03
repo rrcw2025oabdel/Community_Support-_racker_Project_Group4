@@ -1,11 +1,18 @@
 /* Student Name : Abdelhamid OUGHANEM
-Version : V 1.0.0 */
+Version : V 2.0.0 */
 
 /**
  * @jest-environment jsdom
  */
 
-const { donations, handleDonationSubmit } = require("./donation");
+const { 
+  donations, 
+  handleDonationSubmit,
+  displayDonations,
+  updateTotalAmount,
+  deleteDonation
+} = require("./donation");
+
 // test setup
 describe("Donation Form Integration Test", () => {
 
@@ -222,3 +229,127 @@ test("Flags invalid donation amounts (non-numeric and negative)", () => {
     // Cleaning the DOM
     document.body.innerHTML = "";
 });
+
+// Part two tests
+
+describe("Donation Tracker Display and Persistence Tests", () => {
+  beforeEach(() => {
+    // Clearing localStorage
+    localStorage.clear();
+
+    // Setup DOM elements needed for displayDonations and updateTotalAmount
+    document.body.innerHTML = `
+      <table id="donationsTable">
+        <tbody></tbody>
+      </table>
+      <div id="donationSummary">
+        Total donated: $<span id="totalAmount">0</span>
+      </div>
+    `;
+
+    // Clearing donations array
+    donations.length = 0;
+  });
+
+  // Integration test 1 : testing that Donation table updates correctly after adding data to donations array
+  test("Donation table updates correctly after adding data to donations array", () => {
+    const sampleDonations = [
+      {
+        charityName: "red River",
+        donationAmount: "1000",
+        donationDate: "2025-12-01",
+        donorMessage: "Thank you!"
+      }
+    ];
+
+    donations.splice(0, donations.length, ...sampleDonations);
+    displayDonations();
+
+    const tbody = document.querySelector("#donationsTable tbody");
+    expect(tbody.children.length).toBe(1);
+
+    const firstRowCells = tbody.children[0].querySelectorAll("td");
+    expect(firstRowCells[0].textContent).toBe("red River");
+    expect(firstRowCells[1].textContent).toBe("$1000");
+    expect(firstRowCells[2].textContent).toBe("2025-12-01");
+    expect(firstRowCells[3].textContent).toBe("Thank you!");
+  });
+
+  // Integration test 2 : testing that Data persisted in localStorage is correctly retrieved and displayed in the donation table
+  test("Data persisted in localStorage is correctly retrieved and displayed in the donation table", () => {
+    const sampleDonations = [
+      { charityName: "red River", donationAmount: "500", donationDate: "2025-12-01", donorMessage: "Happy to donate" },
+      { charityName: "AD&D", donationAmount: "2000", donationDate: "2025-12-01", donorMessage: "Thank you!" }
+    ];
+
+    // Simulate loading donations from storage
+    donations.splice(0, donations.length, ...sampleDonations);
+    displayDonations();
+
+    const rows = document.querySelectorAll("#donationsTable tbody tr");
+    expect(rows.length).toBe(2);
+    expect(rows[0].querySelector("td").textContent).toBe("red River");
+    expect(rows[1].querySelector("td").textContent).toBe("AD&D");
+  });
+  // unit test 1 : testing that Total donation amount is calculated and displayed correctly
+  test("Calculates the total donation amount correctly", () => {
+    const sampleDonations = [
+      { donationAmount: "1000" },
+      { donationAmount: "2000" },
+      { donationAmount: "500" },
+    ];
+
+    donations.splice(0, donations.length, ...sampleDonations);
+    updateTotalAmount();
+
+    const totalElem = document.getElementById("totalAmount");
+    expect(totalElem.textContent).toBe("3500.00");
+  });
+
+  // unit test 2 : testing that Deleting a record updates donations array and the donation table
+  test("Deleting a record updates donations array and the donation table", () => {
+    const initialDonations = [
+      { charityName: "red River", donationAmount: "500", donationDate: "2025-12-01", donorMessage: "Happy to donate" },
+      { charityName: "AD&D", donationAmount: "2000", donationDate: "2025-12-01", donorMessage: "Thank you!" }
+    ];
+
+    donations.splice(0, donations.length, ...initialDonations);
+    displayDonations();
+
+    // Deleting the first donation (index 0)
+    deleteDonation(0);
+
+    // Donations array length should decrease by one
+    expect(donations.length).toBe(1);
+
+    // Checking the donation table updates accordingly
+    const rows = document.querySelectorAll("#donationsTable tbody tr");
+    expect(rows.length).toBe(1);
+    expect(rows[0].querySelector("td").textContent).toBe("AD&D");
+  });
+
+  // unit test 3 : testing that Total donation amount updates correctly after deleting a record
+  test("Total donation amount updates correctly after deleting a record", () => {
+    const initialDonations = [
+      { charityName: "red River", donationAmount: "500", donationDate: "2025-12-01", donorMessage: "Happy to donate" },
+      { charityName: "AD&D", donationAmount: "2000", donationDate: "2025-12-01", donorMessage: "Thank you!" }
+    ];
+
+    donations.splice(0, donations.length, ...initialDonations);
+    displayDonations();
+    updateTotalAmount();
+
+    let totalElem = document.getElementById("totalAmount");
+    expect(totalElem.textContent).toBe("2500.00");
+
+    // Deleting the first donation (index 0)
+    deleteDonation(0);
+
+    displayDonations();
+    updateTotalAmount();
+
+    totalElem = document.getElementById("totalAmount");
+    expect(totalElem.textContent).toBe("2000.00");
+  });
+});
+

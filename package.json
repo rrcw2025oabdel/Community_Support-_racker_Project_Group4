@@ -269,6 +269,12 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(jsdom|parse5)/)"
+    ]
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rrcw2025oabdel/Community_Support-_racker_Project_Group4.git"
