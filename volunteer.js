@@ -17,7 +17,34 @@ const showInputError = (inputElement, message) => {
     inputElement.parentElement.appendChild(errorDisplay);
 }
 
-// As the name implies, the form inputs will be validated to ensure data is correct.
+// Function used to render the table data using the localstorage
+const renderDataTable = () => {
+    const volunteerTable = document.querySelector('#volunteer-table tbody');
+    let volunteerList = loadData() || [];
+
+    volunteerTable.html = ""
+
+    volunteerList.forEach((entry, current) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${entry.charity}</td>
+            <td>${entry.hours}</td>
+            <td>${entry.date}</td>
+            <td>${entry.rating}</td>
+            <td>
+                <button class="delete-volunteer" ${current}>Delete</button>
+            </td>
+        `;
+        volunteerTable.appendChild(row)
+    })    
+};
+
+// Function used to render the summary data section
+const renderSummaryData = () => {
+
+};
+
+// The function that will be called to perform the form input validaitons
 const validateForm = () =>{
     let isValid = true;
 
@@ -66,10 +93,15 @@ const validateForm = () =>{
     return isValid;
 }
 
-// Event listening for Form Submission
 if (typeof window !== undefined) {
-    const form = document.getElementById("volunteer-hours-tracker")
+    const form = document.getElementById("volunteer-hours-tracker");
+    const volunteerTable = document.getElementById("volunteer-table");
+    const volunteerInformation = document.querySelector('#volunter-table tbody')
 
+    volunteerTable.style.display = "none";
+
+
+    // Event listening for Form Submission
     form.addEventListener("submit", (event) =>{
         const errorMessages = document.querySelectorAll(".error-message");
         for (const el of errorMessages) {
@@ -93,10 +125,14 @@ if (typeof window !== undefined) {
             saveLocal(volunteerData);
 
             // Form Submission
-            form.submit();
+            if (volunteerData.length > 0){
+            volunteerTable.style.display = 'block';
+            renderDataTable();
+            form.reset()
+            }
 
         } else {
-            console.log("temp-fail")
+            console.log("temp-fail");
         }
     });
 
