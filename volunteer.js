@@ -21,6 +21,9 @@ const showInputError = (inputElement, message) => {
 const renderDataTable = () => {
     const volunteerTable = document.querySelector('#volunteer-table tbody');
     let volunteerList = loadData() || [];
+    if (volunteerList.length === 0){
+        document.getElementById("volunteer-table").style.display = "none";
+    };
 
     volunteerTable.innerHTML = ""
 
@@ -52,13 +55,16 @@ const deleteVolunteerEntry = (entry) => {
 const renderSummaryData = () =>  {
     const volunteerSummary = document.getElementById("summary-total")
     let volunteerList = loadData() || [];
+    if (volunteerList.length === 0){
+        document.getElementById("volunteer-summary").style.display = "none";
+    } else {
     let total = 0;
     
     volunteerList.forEach((entry) => {
         total += parseInt(entry.hours)
-        volunteerSummary.textContent = total;
     })
     volunteerSummary.textContent = total;
+}
 };
 
 // The function that will be called to perform the form input validaitons
