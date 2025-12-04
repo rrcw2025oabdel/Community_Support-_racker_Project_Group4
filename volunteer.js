@@ -64,6 +64,7 @@ const renderSummaryData = () =>  {
         total += parseInt(entry.hours)
     })
     volunteerSummary.textContent = total;
+    return total; // For testing purposes
 }
 };
 
@@ -162,5 +163,5 @@ if (typeof window !== undefined) {
     });
 
 } else {
-    module.exports = { validateForm, storeData, showInputError };
+    module.exports = { validateForm, storeData, showInputError, saveLocal, renderDataTable, renderSummaryData, deleteVolunteerEntry, loadData };
 }
