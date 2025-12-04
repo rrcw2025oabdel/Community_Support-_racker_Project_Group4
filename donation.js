@@ -1,9 +1,23 @@
 
 /* Student Name : Abdelhamid OUGHANEM
-Version : V 1.0.0 */
+Version : V 2.0.0 */
 
 // Temporary object to store donations details
 let donations = [];
+
+// Defining a constant for local storage key
+const STORAGE_KEY = "donation_tracker_data";
+
+//function that save donations to local storage
+function saveDonationsToStorage() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(donations));
+}
+
+// function that load donations from local storage
+function loadDonationsFromStorage() {
+    const storedData = localStorage.getItem(STORAGE_KEY);
+    return storedData ? JSON.parse(storedData) : [];
+}
 
 // Clearing previous error messages
 function clearErrors(form) {
@@ -77,13 +91,50 @@ function handleDonationSubmit(event) {
 
     donations.push(formData);
 
-    // Displaying data temporary in the console 
-    console.log(
-  `Donation added: ${formData.charityName} - $${formData.donationAmount} on ${formData.donationDate}` + 
-  (formData.donorMessage ? ` | Comment: ${formData.donorMessage}` : '')
-);
-
     form.reset();
+    
+    displayDonations();
+    updateTotalAmount();
+    saveDonationsToStorage();
+}
+// Function that display donations in the table
+function displayDonations() {
+    const tableBody = document.querySelector('#donationsTable tbody');
+    if (!tableBody) {
+        return;
+    }
+    tableBody.innerHTML = ""; // Clear previous rows
+
+    donations.forEach((donation, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${donation.charityName}</td>
+            <td>$${donation.donationAmount}</td>
+            <td>${donation.donationDate}</td>
+            <td>${donation.donorMessage || ""}</td>
+            <td>
+                <button class="delete-btn" onclick="deleteDonation(${index})">Delete</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Function that delete a donation entry
+function deleteDonation(index) {
+    donations.splice(index, 1);
+    saveDonationsToStorage();
+    displayDonations();   
+    updateTotalAmount()
+}
+
+
+function updateTotalAmount() {
+    const total = donations.reduce((sum, donation) => sum + Number(donation.donationAmount), 0);
+    const totalElement = document.getElementById('totalAmount');
+    if (totalElement) {
+        totalElement.textContent = total.toFixed(2);
+    }
 }
 
 // Attaching event listener to the form
@@ -92,6 +143,9 @@ function attachFormListener() {
     if (form) {
         form.addEventListener('submit', handleDonationSubmit);
     }
+    donations = loadDonationsFromStorage(); 
+    displayDonations();
+    updateTotalAmount();
 }
 
 
@@ -99,5 +153,15 @@ if (typeof window !== "undefined") {
     window.onload = attachFormListener;
 }
 
-module.exports = { donations, isValidDateFormat, showError, handleDonationSubmit };
+module.exports = { 
+    donations, 
+    isValidDateFormat, 
+    showError, 
+    handleDonationSubmit,
+    deleteDonation,
+    saveDonationsToStorage,
+    loadDonationsFromStorage,
+    displayDonations,
+    updateTotalAmount
+};
 

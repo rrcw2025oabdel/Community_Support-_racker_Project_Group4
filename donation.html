@@ -1,4 +1,4 @@
-<!-- Student Name : Abdelhamid OUGHANEM , Version : V 1.0.0 -->
+<!-- Student Name : Abdelhamid OUGHANEM , Version : V 2.0.0 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,9 +68,30 @@
 
         <button type="submit" class="donation-tracker__btn">Add Donation</button>
     </form>
+</section>
 
-    <!-- submitted donations will be added here -->
-    <div id="donationList" class="donation-list"></div>
+<!-- Donation table -->
+<section id="donationListSection">
+  <h2>Donations</h2>
+  <table id="donationsTable" aria-label="Donations table">
+    <thead>
+      <tr>
+        <th>Charity Name</th>
+        <th>Donation Amount</th>
+        <th>Date</th>
+        <th>Donor Comment</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- rows inserted dynamically -->
+    </tbody>
+  </table>
+
+  <!-- Summary -->
+  <div id="donationSummary">
+    <p>Total donated: $<span id="totalAmount">0</span></p>
+  </div>
 </section>
 
 <footer class="main-footer">

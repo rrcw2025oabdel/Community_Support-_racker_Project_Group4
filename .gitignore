@@ -1,6 +1,7 @@
 # Ignore node modules folder
 node_modules/
  
+
 # Ignore logs
 logs
 *.log
@@ -13,6 +14,7 @@ Thumbs.db
 # Ignore environment files
 .env
  
+
 # Ignore package files to avoid conflicts (as per our agreement)
 package.json
 package-lock.json
