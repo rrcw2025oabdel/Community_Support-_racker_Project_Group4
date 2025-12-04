@@ -3,6 +3,7 @@ Javascript Form assignment 7 part 1
 Paige Bender
 November 20th, 2025
 */
+
 const validateForm = () => {
         let isValid = true;
         const firstName = document.getElementById("first-name");
@@ -10,7 +11,7 @@ const validateForm = () => {
         if(firstName.value ===""){
             showInputError(firstName, "First name is required");
             isValid = false;
-            console.error("first name must be filled out.");
+            // console.error("first name must be filled out.");
         }
 
         const lastName = document.getElementById("last-name");
@@ -18,13 +19,13 @@ const validateForm = () => {
         if(lastName.value ===""){
             showInputError(lastName, "Last name is required");
             isValid = false;
-            console.error("last name must be filled out.");
+            // console.error("last name must be filled out.");
         }
 
         const emailInput = document.getElementById("email");
         const complexEmailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
         if(!complexEmailPattern.test(emailInput.value)){
-            console.error("please enter complex email address");
+            // console.error("please enter complex email address");
             showInputError(emailInput, "Please enter a valid email address");
             isValid = false;
         }
@@ -39,17 +40,17 @@ const validateForm = () => {
             }
         }
         if (!isRadio) {
-            console.error("please select one option");
+            // console.error("please select one option");
             showInputError(document.getElementById("radio-title"), "Please select one option");
             isValid = false;
 
         }
         
         const eventDropdown = document.getElementById("participant");
-        if(eventDropdown.value ==="option-1") {
+        if(eventDropdown.value ==="choose") {
             showInputError(eventDropdown, "An option must be selected");
             isValid = false;
-            console.error("an option must be selected.");
+            // console.error("an option must be selected.");
         }
         
     return isValid;
@@ -64,11 +65,96 @@ const validateForm = () => {
         inputElement.parentElement.appendChild(errorDisplay);
     };
 
+function renderSummary() {
+    const container = document.getElementById("summary-section");
+    container.innerHTML = "";
+
+    const data = JSON.parse(localStorage.getItem("signups")) || [];
+    
+    const events = {};
+
+    
+    data.forEach(item => {
+        const eventName = item.eventType;
+        const role = item.participant;
+
+        if (!events[eventName]) {
+            events[eventName] = {};
+        }
+        if (!events[eventName][role]) {
+            events[eventName][role] = 0;
+        }
+        events[eventName][role] ++;
+    });
+
+ 
+    for (const event in events) {
+        const eventDiv = document.createElement("div");
+        const title = document.createElement("h3");
+        title.textContent = event;
+        eventDiv.appendChild(title);
+
+        for (const participant in events[event]) {
+            const p = document.createElement("p");
+            p.textContent = `${participant}: ${events[event][participant]}`;
+            eventDiv.appendChild(p);
+        }
+
+        container.appendChild(eventDiv);
+    }
+}
+
+function renderTable() {
+    const tableBody = document.getElementById("signup-table-body");
+    tableBody.innerHTML = ""; 
+
+    const data = JSON.parse(localStorage.getItem("signups")) || [];
+
+    data.forEach((item, index) => {
+        const row = document.createElement("tr");
+    
+        row.innerHTML = `
+            <td>${item.eventType}</td>
+            <td>${item.firstName} ${item.lastName}</td>
+            <td>${item.email}</td>
+            <td>${item.participant}</td>
+            <td><button class="delete-btn" data-index="${index}">Delete</button></td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+
+    attachDeleteButtons(); 
+}
+
+function attachDeleteButtons() {
+    const buttons = document.querySelectorAll(".delete-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const index = btn.getAttribute("data-index");
+            const data = JSON.parse(localStorage.getItem("signups")) || [];
+            data.splice(index, 1); 
+            localStorage.setItem("signups", JSON.stringify(data));
+
+            renderTable();    
+            renderSummary();  
+        });
+    });
+}
+
 let tempData = {};
 
 if (typeof window !== "undefined") {
-    
-    const form = document.getElementById("event-form")
+
+    // window.addEventListener("DOMContentLoaded", () => {
+    // renderTable();
+    // renderSummary();   
+    // });
+    const form = document.getElementById("event-form");
+    const tableSection = document.querySelector(".table");
+
+    tableSection.style.display = "none";
 
     form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -79,7 +165,7 @@ if (typeof window !== "undefined") {
         }
 
         if (validateForm()) {
-            form.submit();
+            // form.submit();
             tempData = {
                 firstName: document.getElementById("first-name").value,
                 lastName: document.getElementById("last-name").value,
@@ -87,13 +173,27 @@ if (typeof window !== "undefined") {
                 eventType: document.querySelector('input[name="event-type"]:checked').value,
                 participant: document.getElementById("participant").value
             };
-            console.log(tempData.firstName)
-            console.log("validation successful")
-        } else {
-            console.log("validation not successful") 
-        }
-    });
 
+            const stored = JSON.parse(localStorage.getItem("signups")) || [];
+            stored.push(tempData);
+            localStorage.setItem("signups", JSON.stringify(stored));
+            
+            // form.style.display = "none";
+        
+            if (stored.length > 0) {
+                tableSection.style.display = "block";
+                renderTable();
+                renderSummary();
+                form.reset();
+            }
+        
+            console.log("validation successful");
+        } else {
+            console.log("validation not successful");
+              }
+            });
+    
 } else {
-    module.exports = { validateForm, tempData, showInputError };
+    module.exports = { validateForm, tempData, showInputError, renderTable, attachDeleteButtons, renderSummary};
 }
+

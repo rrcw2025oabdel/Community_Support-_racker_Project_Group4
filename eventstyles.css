@@ -73,82 +73,74 @@ body {
     color: white;
     margin-top: 90px;
 }
-
+/*____________________________________________________________________________*/
 .main-container {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 32px;
-    padding: 60px 0;
-    justify-content: center;
-    align-items:center;
-}
-.error-message {
-				color: red;
-				font-style: italic;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 4px 8px #0000000d;
 }
 
-form {
-    grid-column-start: 2;
-    grid-column-end: 12; 
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 1rem;
-    background: #fff;
-	padding: 2rem;
-	border-radius: 2rem;
-	box-shadow: 0 3px 10px #0000001a;
-  
-} 
-/* fieldset{
- grid-column-start: 1;
- grid-column-end: 13;   
-} */
-
-form h1{
-    color: #575E9F;
-    font-weight: bold;
-    font-size: 32px;
-    margin-bottom: .2rem;
-    grid-column-start: 1;
-    grid-column-end: 13;
-    text-align: center; 
+.main-container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #313886;
+    text-align: center;
 }
 
-form p {
-    margin-top: 0;
-    margin-bottom: 3rem;   
-    font-size: 16px;
-    line-height: 1.6;
-    color: #1A1A1A;
-    grid-column-start: 1;
-    grid-column-end: 13;
-    text-align: center; 
-
+.main-container p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #333;
 }
 
-input, textarea, select {
-    font-size: 26px;
-    background-color: #fff;
-    color: #1A1A1A;
+.event-radio-group, .first-name, .last-name, .email-class, .dropdown {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.8rem; 
+}
+
+.event-radio-group p {
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #222;
+}
+
+.first-name label, .last-name label, .email-class label, .dropdown label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+form input,
+form textarea,
+form select {
+    padding: 0.7rem 1rem;
     border: 1px solid #ccc;
-	border-radius: 0.25em;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border 0.3s;
 }
 
-input:focus, textarea:focus, select:focus {
+form input:focus,
+form textarea:focus,
+form select:focus {
     border-color: #313886;
     outline: none;
 }
-#radio-title{
-    grid-column-start: 1;
-    grid-column-end: 13;
-    text-align: center;
-    margin-bottom: 0.2rem; 
+.event-radio-group .radio-options {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    gap: 1.5rem;     
+    justify-content: center;
 }
-.event-radio-group{
-    grid-column-start: 1;
-    grid-column-end: 13;
-    text-align: center; 
-}
+
 input[type="radio"],textarea,select {
     outline: none;
 }
@@ -163,38 +155,73 @@ input[type="radio"] {
     outline: none;
     box-shadow: none;
 }
-.first-name, .last-name, .email-class, .dropdown{
-    grid-column-start: 1;
-    grid-column-end: 13;
-    text-align: center; 
-    width: 100%;
-    gap: 1rem;
-    align-items: center;
-    margin-bottom: 1rem;
-}
+
 .submit-button{
-    grid-column-start: 5;
-    grid-column-end: 9;
-    justify-self: center;
+    margin-top: 1rem;
+    width: 100%;
     background-color: #313886;
     color: #fff;
-    font-weight: bold;
-    border: none; 
-    width: 100%;
-    margin: .5rem;
-    padding: .5rem; 
-    font-size: 20px;
-    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.2s ease;
 }
 
 .submit-button:hover{
     background-color: #5058c0;
 }
 
+.error-message {
+				color: red;
+				font-style: italic;
+}
+/*---------------------------------------------------------------------------*/
+.table {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 4px 8px #0000000d;
+    align-items: center;
+}
 
+.table h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #313886;
+    text-align: center;
+}
 
+.table table{
+    width: 100%;
+    border-collapse: collapse;
+
+}
+.table th, .table td{
+    padding: 0.5rem 1re,;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+}
+.table tbody tr:hover {
+    background-color: #ccc;
+}
+
+.table td button.delete-btn {
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #313886;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.table td button.delete-btn:hover {
+    background-color: #5058c0;
+}
+/*____________________________________________________________________________*/
 /* Responsive mobile */
 
 @media (max-width: 900px) {
@@ -227,10 +254,27 @@ input[type="radio"] {
     .hamburger {
         display: flex;
     }
+     .table {
+        padding: 1rem;
+        max-width: 95%;
+    }
+
+    .table th, .table td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .table td button.delete-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+    }
 }
+
 
 @media (max-width: 768px) {
     .feature-card img {
         aspect-ratio: 3 / 3;
     }
 }
+
+

@@ -5,178 +5,198 @@ Paige Bender
 November 20th, 2025
 */
 
+const validateForm = () => {
+        let isValid = true;
+        const firstName = document.getElementById("first-name");
+
+        if(firstName.value ===""){
+            showInputError(firstName, "First name is required");
+            isValid = false;
+            // console.error("first name must be filled out.");
+        }
+
+        const lastName = document.getElementById("last-name");
+
+        if(lastName.value ===""){
+            showInputError(lastName, "Last name is required");
+            isValid = false;
+            // console.error("last name must be filled out.");
+        }
+
+        const emailInput = document.getElementById("email");
+        const complexEmailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+        if(!complexEmailPattern.test(emailInput.value)){
+            // console.error("please enter complex email address");
+            showInputError(emailInput, "Please enter a valid email address");
+            isValid = false;
+        }
+
+        const selectRadio = document.getElementsByName("event-type");
+        let isRadio = false;
+
+        for (let i = 0; i < selectRadio.length; i++) {
+            if (selectRadio[i].checked) {
+                isRadio = true;
+                break;
+            }
+        }
+        if (!isRadio) {
+            // console.error("please select one option");
+            showInputError(document.getElementById("radio-title"), "Please select one option");
+            isValid = false;
+
+        }
+        
+        const eventDropdown = document.getElementById("participant");
+        if(eventDropdown.value ==="choose") {
+            showInputError(eventDropdown, "An option must be selected");
+            isValid = false;
+            // console.error("an option must be selected.");
+        }
+        
+    return isValid;
+    };
+
+    const showInputError = (inputElement, message ) => {
+        const errorDisplay = document.createElement("span");
+        errorDisplay.innerText = message;
+        errorDisplay.className = "error-message";
+        errorDisplay.setAttribute("role", "alert");
+
+        inputElement.parentElement.appendChild(errorDisplay);
+    };
+
+function renderSummary() {
+    const container = document.getElementById("summary-section");
+    container.innerHTML = "";
+
+    const data = JSON.parse(localStorage.getItem("signups")) || [];
+    
+    const events = {};
+
+    
+    data.forEach(item => {
+        const eventName = item.eventType;
+        const role = item.participant;
+
+        if (!events[eventName]) {
+            events[eventName] = {};
+        }
+        if (!events[eventName][role]) {
+            events[eventName][role] = 0;
+        }
+        events[eventName][role] ++;
+    });
+
+ 
+    for (const event in events) {
+        const eventDiv = document.createElement("div");
+        const title = document.createElement("h3");
+        title.textContent = event;
+        eventDiv.appendChild(title);
+
+        for (const participant in events[event]) {
+            const p = document.createElement("p");
+            p.textContent = `${participant}: ${events[event][participant]}`;
+            eventDiv.appendChild(p);
+        }
+
+        container.appendChild(eventDiv);
+    }
+}
+
+function renderTable() {
+    const tableBody = document.getElementById("signup-table-body");
+    tableBody.innerHTML = ""; 
+
+    const data = JSON.parse(localStorage.getItem("signups")) || [];
+
+    data.forEach((item, index) => {
+        const row = document.createElement("tr");
+    
+        row.innerHTML = `
+            <td>${item.eventType}</td>
+            <td>${item.firstName} ${item.lastName}</td>
+            <td>${item.email}</td>
+            <td>${item.participant}</td>
+            <td><button class="delete-btn" data-index="${index}">Delete</button></td>
+        `;
+
+        tableBody.appendChild(row);
+    });
+
+    attachDeleteButtons(); 
+}
+
+function attachDeleteButtons() {
+    const buttons = document.querySelectorAll(".delete-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const index = btn.getAttribute("data-index");
+            const data = JSON.parse(localStorage.getItem("signups")) || [];
+            data.splice(index, 1); 
+            localStorage.setItem("signups", JSON.stringify(data));
+
+            renderTable();    
+            renderSummary();  
+        });
+    });
+}
+
 let tempData = {};
 
-const form = document.getElementById("event-form")
-
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const errorMessages = document.querySelectorAll(".error-message");
-    for(const el of errorMessages){
-        el.remove();
-    }
-
-    if (validateForm()) {
-        // form.submit();
-        tempData = {
-            firstName: document.getElementById("first-name").value,
-            lastName: document.getElementById("last-name").value,
-            email: document.getElementById("email").value,
-            eventType: document.querySelector('input[name="event-type"]:checked').value,
-            participant: document.getElementById("participant").value
-        };
-        console.log(tempData.firstName)
-        console.log("validation successful")
-    } else {
-        console.log("validation not successful") 
-    }
-});
-
-const validateForm = () => {
-    let isValid = true;
-    const firstName = document.getElementById("first-name");
-
-    if(firstName.value ===""){
-        showInputError(firstName, "First name is required");
-        isValid = false;
-        console.error("first name must be filled out.");
-    }
-
-    const lastName = document.getElementById("last-name");
-
-    if(lastName.value ===""){
-        showInputError(lastName, "Last name is required");
-        isValid = false;
-        console.error("last name must be filled out.");
-    }
-
-    const emailInput = document.getElementById("email");
-    const complexEmailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    if(!complexEmailPattern.test(emailInput.value)){
-        console.error("please enter complex email address");
-        showInputError(emailInput, "Please enter a valid email address");
-        isValid = false;
-    }
-
-    const selectRadio = document.getElementsByName("event-type");
-    let isRadio = false;
-
-    for (let i = 0; i < selectRadio.length; i++) {
-        if (selectRadio[i].checked) {
-            isRadio = true;
-            break;
-        }
-    }
-    if (!isRadio) {
-        console.error("please select one option");
-        showInputError(document.getElementById("radio-title"), "Please select one option");
-        isValid = false;
-
-    }
-    
-    const eventDropdown = document.getElementById("participant");
-    if(eventDropdown.value ==="option-1") {
-        showInputError(eventDropdown, "An option must be selected");
-        isValid = false;
-        console.error("an option must be selected.");
-    }
-    
-return isValid;
-};
-const showInputError = (inputElement, message ) => {
-    const errorDisplay = document.createElement("span");
-    errorDisplay.innerText = message;
-    errorDisplay.className = "error-message";
-    errorDisplay.setAttribute("role", "alert");
-
-    inputElement.parentElement.appendChild(errorDisplay);
-};
-
-
 if (typeof window !== "undefined") {
-   
+
+    // window.addEventListener("DOMContentLoaded", () => {
+    // renderTable();
+    // renderSummary();   
+    // });
+    const form = document.getElementById("event-form");
+    const tableSection = document.querySelector(".table");
+
+    tableSection.style.display = "none";
+
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const errorMessages = document.querySelectorAll(".error-message");
+        for(const el of errorMessages){
+            el.remove();
+        }
+
+        if (validateForm()) {
+            // form.submit();
+            tempData = {
+                firstName: document.getElementById("first-name").value,
+                lastName: document.getElementById("last-name").value,
+                email: document.getElementById("email").value,
+                eventType: document.querySelector('input[name="event-type"]:checked').value,
+                participant: document.getElementById("participant").value
+            };
+
+            const stored = JSON.parse(localStorage.getItem("signups")) || [];
+            stored.push(tempData);
+            localStorage.setItem("signups", JSON.stringify(stored));
+            
+            // form.style.display = "none";
+        
+            if (stored.length > 0) {
+                tableSection.style.display = "block";
+                renderTable();
+                renderSummary();
+                form.reset();
+            }
+        
+            console.log("validation successful");
+        } else {
+            console.log("validation not successful");
+              }
+            });
+    
 } else {
-    module.exports = {
-        validateForm,
-        tempData
-    };
-}
-// Form obtained through DOM as a constant
-const form = document.getElementById("volunteer-hours-tracker")
-
-const charityName = document.getElementById("charity");
-const volunteerHours = document.getElementById("hours");
-const dateVolunteered = document.getElementById("date");
-const volunteerRating = document.getElementById("rating");
-
-
-// Function that handles displaying the error messages
-const showInputError = (inputElement, message) => {
-    const errorDisplay = document.createElement("span");
-    errorDisplay.innerText = message;
-    errorDisplay.className = "error-message";
-    errorDisplay.setAttribute("role", "alert");
-
-    inputElement.parentElement.appendChild(errorDisplay);
+    module.exports = { validateForm, tempData, showInputError, renderTable, attachDeleteButtons, renderSummary};
 }
 
-// As the name implies, the form inputs will be validated to ensure data is correct.
-const validateForm = () =>{
-    let isValid = true;
 
-    // Validator for the Charity Name Text Field
-    if (charityName.value === "") {
-        showInputError(charityName, "Please enter a charity name")
-        isValid = false;
-    }
-
-    // Validator for the Hours Volunteered number input
-    if (volunteerHours.value <= 0) {
-        showInputError(volunteerHours, "Value must be higher than zero")
-        isValid = false;
-    }
-
-    // Validator for the Volunteering Date Field
-    const dateCheck = /^\d{4}-\d{2}-\d{2}$/;
-    if (!dateCheck.test(dateVolunteered.value)){
-        showInputError(dateVolunteered, "Please select a date");
-        isValid = false;
-    }
-
-    // Validator for the 1-5 point rating of the volunteering experience
-    if (1 > volunteerRating.value || volunteerRating.value > 5) {
-        showInputError(volunteerRating, "Must be in the 1-5 range.");
-        isValid = false;
-    } else if (volunteerRating.value === "") {
-        showInputError(volunteerRating, "Please select a rating");
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-// Event listening for Form Submission
-form.addEventListener("submit", (event) =>{
-    const errorMessages = document.querySelectorAll(".error-message");
-    for (const el of errorMessages) {
-        el.remove();
-    }
-
-    event.preventDefault();
-
-    if (validateForm()) {
-        let storeData = {
-            charity: charityName.value, 
-            hours: volunteerHours.value, 
-            date: dateVolunteered.value, 
-            rating: volunteerRating.value
-        };
-        form.submit();
-        console.log(storeData)
-        console.log("success!!")
-    } else {
-        console.log("temp-fail")
-    }
-})
 },{}]},{},[1]);
