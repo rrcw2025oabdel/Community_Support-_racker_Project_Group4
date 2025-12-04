@@ -58,6 +58,7 @@ const renderSummaryData = () =>  {
         total += parseInt(entry.hours)
         volunteerSummary.textContent = total;
     })
+    volunteerSummary.textContent = total;
 };
 
 // The function that will be called to perform the form input validaitons
