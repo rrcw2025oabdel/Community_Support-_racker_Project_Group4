@@ -1,3 +1,12 @@
+// Functions for storage
+const saveLocal = (data) => {
+    localStorage.setItem("volunteer_list", JSON.stringify(data));
+}
+
+const loadData = () => {
+    return JSON.parse(localStorage.getItem("volunteer_list"));
+}
+
 // Function that handles displaying the error messages
 const showInputError = (inputElement, message) => {
     const errorDisplay = document.createElement("span");
@@ -57,10 +66,8 @@ const validateForm = () =>{
     return isValid;
 }
 
-let storeData = {}
-
 // Event listening for Form Submission
-if (typeof window !== "undefined") {
+if (typeof window !== undefined) {
     const form = document.getElementById("volunteer-hours-tracker")
 
     form.addEventListener("submit", (event) =>{
@@ -72,16 +79,22 @@ if (typeof window !== "undefined") {
         event.preventDefault();
 
         if (validateForm()) {
-            storeData = {
+            // Data storing in an object, then being inserted into the dataset array
+
+            volunteer = {
                 charity: document.getElementById("charity").value, 
                 hours: document.getElementById("hours").value, 
                 date: document.getElementById("date").value, 
                 rating: document.getElementById("rating").value
             };
+            
+            const volunteerData = loadData() || [];
+            volunteerData.push(volunteer);
+            saveLocal(volunteerData);
+
+            // Form Submission
             form.submit();
-            console.log(storeData)
-            console.log("success!!")
-            console.log(storeData)
+
         } else {
             console.log("temp-fail")
         }
