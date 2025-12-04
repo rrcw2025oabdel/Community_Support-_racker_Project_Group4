@@ -22,7 +22,7 @@ const renderDataTable = () => {
     const volunteerTable = document.querySelector('#volunteer-table tbody');
     let volunteerList = loadData() || [];
 
-    volunteerTable.html = ""
+    volunteerTable.innerHTML = ""
 
     volunteerList.forEach((entry, current) => {
         const row = document.createElement("tr");
@@ -32,12 +32,21 @@ const renderDataTable = () => {
             <td>${entry.date}</td>
             <td>${entry.rating}</td>
             <td>
-                <button class="delete-volunteer" ${current}>Delete</button>
+                <button class="volunteer-delete" onclick="deleteVolunteerEntry(${current})">Delete</button>
             </td>
         `;
         volunteerTable.appendChild(row)
     })    
 };
+
+// Function that will be called when the user wants to delete an entry in the table
+const deleteVolunteerEntry = (entry) => {
+    let volunteer_list = loadData() || [];
+    volunteer_list.splice(entry, 1);
+    saveLocal(volunteer_list);
+    renderDataTable();
+    renderSummaryData();
+}
 
 // Function used to render the summary data section
 const renderSummaryData = () =>  {
