@@ -40,8 +40,15 @@ const renderDataTable = () => {
 };
 
 // Function used to render the summary data section
-const renderSummaryData = () => {
-
+const renderSummaryData = () =>  {
+    const volunteerSummary = document.getElementById("summary-total")
+    let volunteerList = loadData() || [];
+    let total = 0;
+    
+    volunteerList.forEach((entry) => {
+        total += parseInt(entry.hours)
+        volunteerSummary.textContent = total;
+    })
 };
 
 // The function that will be called to perform the form input validaitons
@@ -96,10 +103,10 @@ const validateForm = () =>{
 if (typeof window !== undefined) {
     const form = document.getElementById("volunteer-hours-tracker");
     const volunteerTable = document.getElementById("volunteer-table");
-    const volunteerInformation = document.querySelector('#volunter-table tbody')
+    const volunteerSummary = document.getElementById("volunteer-summary")
 
     volunteerTable.style.display = "none";
-
+    volunteerSummary.style.display = "none";
 
     // Event listening for Form Submission
     form.addEventListener("submit", (event) =>{
@@ -126,9 +133,11 @@ if (typeof window !== undefined) {
 
             // Form Submission
             if (volunteerData.length > 0){
+            volunteerSummary.style.display = 'block';
             volunteerTable.style.display = 'block';
             renderDataTable();
-            form.reset()
+            renderSummaryData();
+            form.reset();
             }
 
         } else {
