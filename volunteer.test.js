@@ -1,5 +1,5 @@
 const { JSDOM } = require("jsdom");
-const { validateForm, storeData } = require("./volunteer")
+const { validateForm, storeData, saveLocal, loadData, renderSummaryData, deleteVolunteerEntry } = require("./volunteer")
 
 test("when inputs are correct, then the storeData object data matches the input data", () => {
     const dom = new JSDOM(`<!DOCTYPE html>
@@ -145,4 +145,77 @@ test("when rating isn't in the 5 point range, then validateForm returns false", 
     expect(result).toBe(false);
 })
 
+test("check that the local storage saving functionality works as intended, checking the length of the array pulled", () => {
+    localStorage.clear()
+
+    const testVolunteerData = [
+        {"charity": "Charity One", "hours": 15, "date": "2025-05-02", "rating": 3},
+        {"charity": "Charity Two", "hours": 7, "date": "2025-02-03", "rating": 2}
+    ]
+
+    saveLocal(testVolunteerData);
+
+    let storedData = loadData()
+    expect(storedData.length).toBe(2)
+})
+
+test("check to see that the table updates properly when localstorage saves the data provided", () => {
+    localStorage.clear()
+
+    const testVolunteerData = [
+        {"charity": "Charity One", "hours": 15, "date": "2025-05-02", "rating": 3},
+        {"charity": "Charity Two", "hours": 7, "date": "2025-02-03", "rating": 2}
+    ]
+
+    saveLocal(testVolunteerData)
+
+    const volunteerDataTable = document.querySelector('#volunteer-table tbody')
+    expect(volunteerDataTable.children.length).toBe(2)
+})
+
+test("check to see that the volunteer hours are updating correctly with the function", () =>{
+    localStorage.clear()
+
+    const testVolunteerData = [
+        {"charity": "Charity One", "hours": 15, "date": "2025-05-02", "rating": 3},
+        {"charity": "Charity Two", "hours": 7, "date": "2025-02-03", "rating": 2}
+    ]
+
+    saveLocal(testVolunteerData)
+
+    expect(renderSummaryData()).toBe(22)
+})
+
+test("check to see that delete button functions as intended, changing both the table and dataset", () => {
+    localStorage.clear()
+
+    const testVolunteerData = [
+        {"charity": "Charity One", "hours": 15, "date": "2025-05-02", "rating": 3},
+        {"charity": "Charity Two", "hours": 7, "date": "2025-02-03", "rating": 2}
+    ]
+
+    saveLocal(testVolunteerData)
+    deleteVolunteerEntry(0)
+
+    let updatedData = loadData()
+    expect(updatedData.length).toBe(1)
+
+    const volunteerDataTable = document.querySelector('#volunteer-table tbody')
+    expect(volunteerDataTable.children.length).toBe(1)
+})
+
+test("check to see that the volunteer hours update when a record is deleted", () => {
+    localStorage.clear()
+
+    const testVolunteerData = [
+        {"charity": "Charity One", "hours": 15, "date": "2025-05-02", "rating": 3},
+        {"charity": "Charity Two", "hours": 7, "date": "2025-02-03", "rating": 2},
+        {"charity": "Charity Three", "hours": 9, "date": "2025-01-07", "rating": 5}
+    ]
+
+    saveLocal(testVolunteerData)
+    deleteVolunteerEntry(0)
+
+    expect(renderSummaryData()).toBe(16)
+})
 

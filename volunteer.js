@@ -1,3 +1,12 @@
+// Functions for storage
+const saveLocal = (data) => {
+    localStorage.setItem("volunteer_list", JSON.stringify(data));
+}
+
+const loadData = () => {
+    return JSON.parse(localStorage.getItem("volunteer_list"));
+}
+
 // Function that handles displaying the error messages
 const showInputError = (inputElement, message) => {
     const errorDisplay = document.createElement("span");
@@ -8,7 +17,58 @@ const showInputError = (inputElement, message) => {
     inputElement.parentElement.appendChild(errorDisplay);
 }
 
-// As the name implies, the form inputs will be validated to ensure data is correct.
+// Function used to render the table data using the localstorage
+const renderDataTable = () => {
+    const volunteerTable = document.querySelector('#volunteer-table tbody');
+    let volunteerList = loadData() || [];
+    if (volunteerList.length === 0){
+        document.getElementById("volunteer-table").style.display = "none";
+    };
+
+    volunteerTable.innerHTML = ""
+
+    volunteerList.forEach((entry, current) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${entry.charity}</td>
+            <td>${entry.hours}</td>
+            <td>${entry.date}</td>
+            <td>${entry.rating}</td>
+            <td>
+                <button class="volunteer-delete" onclick="deleteVolunteerEntry(${current})">Delete</button>
+            </td>
+        `;
+        volunteerTable.appendChild(row)
+    })    
+};
+
+// Function that will be called when the user wants to delete an entry in the table
+const deleteVolunteerEntry = (entry) => {
+    let volunteer_list = loadData() || [];
+    volunteer_list.splice(entry, 1);
+    saveLocal(volunteer_list);
+    renderDataTable();
+    renderSummaryData();
+}
+
+// Function used to render the summary data section
+const renderSummaryData = () =>  {
+    const volunteerSummary = document.getElementById("summary-total")
+    let volunteerList = loadData() || [];
+    if (volunteerList.length === 0){
+        document.getElementById("volunteer-summary").style.display = "none";
+    } else {
+    let total = 0;
+    
+    volunteerList.forEach((entry) => {
+        total += parseInt(entry.hours)
+    })
+    volunteerSummary.textContent = total;
+    return total; // For testing purposes
+}
+};
+
+// The function that will be called to perform the form input validaitons
 const validateForm = () =>{
     let isValid = true;
 
@@ -57,12 +117,15 @@ const validateForm = () =>{
     return isValid;
 }
 
-let storeData = {}
+if (typeof window !== undefined) {
+    const form = document.getElementById("volunteer-hours-tracker");
+    const volunteerTable = document.getElementById("volunteer-table");
+    const volunteerSummary = document.getElementById("volunteer-summary")
 
-// Event listening for Form Submission
-if (typeof window !== "undefined") {
-    const form = document.getElementById("volunteer-hours-tracker")
+    volunteerTable.style.display = "none";
+    volunteerSummary.style.display = "none";
 
+    // Event listening for Form Submission
     form.addEventListener("submit", (event) =>{
         const errorMessages = document.querySelectorAll(".error-message");
         for (const el of errorMessages) {
@@ -72,21 +135,33 @@ if (typeof window !== "undefined") {
         event.preventDefault();
 
         if (validateForm()) {
-            storeData = {
+            // Data storing in an object, then being inserted into the dataset array
+
+            volunteer = {
                 charity: document.getElementById("charity").value, 
                 hours: document.getElementById("hours").value, 
                 date: document.getElementById("date").value, 
                 rating: document.getElementById("rating").value
             };
-            form.submit();
-            console.log(storeData)
-            console.log("success!!")
-            console.log(storeData)
+            
+            const volunteerData = loadData() || [];
+            volunteerData.push(volunteer);
+            saveLocal(volunteerData);
+
+            // Form Submission
+            if (volunteerData.length > 0){
+            volunteerSummary.style.display = 'block';
+            volunteerTable.style.display = 'block';
+            renderDataTable();
+            renderSummaryData();
+            form.reset();
+            }
+
         } else {
-            console.log("temp-fail")
+            console.log("temp-fail");
         }
     });
 
 } else {
-    module.exports = { validateForm, storeData, showInputError };
+    module.exports = { validateForm, storeData, showInputError, saveLocal, renderDataTable, renderSummaryData, deleteVolunteerEntry, loadData };
 }
