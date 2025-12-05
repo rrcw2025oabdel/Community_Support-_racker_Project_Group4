@@ -117,7 +117,7 @@ const validateForm = () =>{
     return isValid;
 }
 
-if (typeof window !== undefined) {
+if (typeof window !== "undefined") {
     const form = document.getElementById("volunteer-hours-tracker");
     const volunteerTable = document.getElementById("volunteer-table");
     const volunteerSummary = document.getElementById("volunteer-summary")
